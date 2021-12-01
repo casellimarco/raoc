@@ -4,12 +4,10 @@ fn main() {
         .map(|i| i.parse().unwrap())
         .collect();
     let mut counter:usize = 0;
-    let mut previous = usize::MAX;
-    for this in items {
-        if this > previous {
+    for i in 0..items.len() - 1 {
+        if items[i] < items[i+1] {
             counter += 1;
         }
-        previous = this;
     }
     println!("{}",counter);
 }
