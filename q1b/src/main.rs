@@ -4,13 +4,10 @@ fn main() {
         .map(|i| i.parse().unwrap())
         .collect();
     let mut counter:usize = 0;
-    let mut previous = usize::MAX;
-    for w in items.windows(3) {
-        let this = w.iter().sum();
-        if this > previous {
+    for i in 0..items.len() - 3 {
+        if items[i] < items[i+3] {
             counter += 1;
         }
-        previous = this;
     }
     println!("{}",counter);
 }
