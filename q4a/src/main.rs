@@ -38,7 +38,9 @@ fn main() {
             None => {},
             Some(coords) => {
                 for c in coords {
+                    // this one can be instead an array of bools and we can use all instead 
                     tables[[c.0,c.1,c.2]]=0;
+                    // optimise here by just summing over the elements of the mask
                     tables_values[c.0][[c.1,c.2]]=0;
                     if tables.slice(s![c.0, c.1, ..]).iter().sum::<usize>() == 0 ||
                        tables.slice(s![c.0, .., c.2]).iter().sum::<usize>() == 0 {
