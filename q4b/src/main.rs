@@ -6,7 +6,6 @@ extern crate ndarray;
 use ndarray::prelude::*;
 
 fn main() {
-    // let mut tables_values: Vec<ArrayView<usize, usize>> = Vec::new();
     let mut tables_values= Vec::new();
     let mut draws: Vec<usize> = Vec::new();
     let mut table: usize = 0;
