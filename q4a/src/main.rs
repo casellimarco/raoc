@@ -42,8 +42,6 @@ fn main() {
                     tables_values[c.0][[c.1,c.2]]=0;
                     if tables.slice(s![c.0, c.1, ..]).iter().sum::<usize>() == 0 ||
                        tables.slice(s![c.0, .., c.2]).iter().sum::<usize>() == 0 {
-                           println!("{:?}", c);
-                           println!("{:?}", tables_values[c.0]);
                            println!("{}", draw*tables_values[c.0].sum());
                            return;
                     }
@@ -51,8 +49,4 @@ fn main() {
             }
         }
     }
-
-
-    println!("{:?}", tables);
-    // println!("{:?}", num_to_coords);
 }
