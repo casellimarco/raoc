@@ -9,13 +9,8 @@ fn main() {
         jf[fish]+=1;
     }
     let days:usize = 80;
-    for _ in 0..days {
-        let nb = jf[0];
-        for i in 1..9 {
-            jf[i-1] = jf[i];
-        }
-        jf[6] += nb;
-        jf[8] = nb;
+    for d in 0..days {
+        jf[(7+d)%9] += jf[d%9];
     }
     println!("{:?}", jf.iter().sum::<usize>());
 
