@@ -1,4 +1,4 @@
-fn main() {
+pub fn main() {
     let mut a: Vec<Vec<i32>> = Vec::new();
     for l in include_str!("../input.txt")
             .lines() {

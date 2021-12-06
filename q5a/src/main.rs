@@ -1,5 +1,5 @@
 use ndarray::prelude::*;
-fn main() {
+pub fn main() {
     let mut area = Array::<usize, _>::zeros((1000,1000));
 
     for l in include_str!("../input.txt").lines()

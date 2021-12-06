@@ -1,0 +1,22 @@
+[package]
+name = "runner"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+rayon = "1.5"
+took = "0.1"
+
+# Days
+q1a = { path = "../q1a" }
+q1b = { path = "../q1b" }
+q2a = { path = "../q2a" }
+q2b = { path = "../q2b" }
+q3a = { path = "../q3a" }
+q3b = { path = "../q3b" }
+q4a = { path = "../q4a" }
+q4b = { path = "../q4b" }
+q5a = { path = "../q5a" }
+q5b = { path = "../q5b" }
+q6a = { path = "../q6a" }
+q6b = { path = "../q6b" }

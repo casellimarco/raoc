@@ -1,4 +1,4 @@
-fn main() {
+pub fn main() {
     let max_day:usize = 9;
     let mut counter = vec![0;max_day];
     for fish in include_str!("../input.txt")
