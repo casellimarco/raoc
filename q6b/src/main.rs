@@ -1,17 +1,15 @@
 fn main() {
-    let fishes: Vec<usize> = include_str!("../input.txt")
+    let max_day:usize = 9;
+    let mut counter = vec![0;max_day];
+    for fish in include_str!("../input.txt")
         .trim()
         .split(",")
-        .map(|i| i.parse().unwrap())
-        .collect();
-    let mut jf = vec![0;9];
-    for fish in fishes {
-        jf[fish]+=1;
+        .map(|i| i.parse::<usize>().unwrap()){
+        counter[fish]+=1;
     }
     let days:usize = 256;
     for d in 0..days {
-        jf[(7+d)%9] += jf[d%9];
+        counter[(7+d)%max_day] += counter[d%max_day];
     }
-    println!("{:?}", jf.iter().sum::<usize>());
-
+    println!("{:?}", counter.iter().sum::<usize>());
 }
