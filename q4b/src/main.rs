@@ -1,11 +1,9 @@
 use std::collections::hash_map::Entry;
 use std::collections::HashMap;
-#[macro_use]
-extern crate ndarray;
 
 use ndarray::prelude::*;
 
-fn main() {
+pub fn main() {
     let mut tables_values= Vec::new();
     let mut draws: Vec<usize> = Vec::new();
     let mut table: usize = 0;

@@ -1,4 +1,4 @@
-fn main() {
+pub fn main() {
     let mut x: i64 = 0;
     let mut y: i64 = 0;
     for l in include_str!("../input.txt")

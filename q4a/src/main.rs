@@ -3,7 +3,7 @@ use std::collections::HashMap;
 
 use ndarray::prelude::*;
 
-fn main() {
+pub fn main() {
     let mut tables_values= Vec::new();
     let mut draws: Vec<usize> = Vec::new();
     let mut table: usize = 0;
