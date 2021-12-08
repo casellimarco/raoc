@@ -20,3 +20,7 @@ q5a = { path = "../q5a" }
 q5b = { path = "../q5b" }
 q6a = { path = "../q6a" }
 q6b = { path = "../q6b" }
+q7a = { path = "../q7a" }
+q7b = { path = "../q7b" }
+q8a = { path = "../q8a" }
+q8b = { path = "../q8b" }
