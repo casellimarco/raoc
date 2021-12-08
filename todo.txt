@@ -1,0 +1,2 @@
+4: remove duplicated structure
+8b: remove bruteforce
