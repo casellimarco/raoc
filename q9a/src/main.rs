@@ -31,10 +31,4 @@ pub fn main() {
         counter += (*v as usize +1)*(is_min as usize);
     }
     println!("{}", counter);
-    // let dx = &area.slice(s![1..,..]) - &area.slice(s![..-1,..]);
-    // let dy = &area.slice(s![..,1..]) - &area.slice(s![..,..-1]);
-    // println!("{:?}",area);
-    // println!("{:?}",dx);
-    // println!("{:?}",dy);
-
 }
