@@ -23,7 +23,6 @@ pub fn main() {
         let mut flashed = Array::<i32, _>::zeros((vec.len(),vec[0].len()));
         let mut check = area.mapv(|a| (a>=10) as i32)*(1-&flashed);
         while check.iter().any(|a| a>&0){
-        // for _ in 0..steps{
             for r in 0..max_row{
                 for c in 0..max_col{
                     let index = [r as usize,c as usize];
@@ -36,11 +35,8 @@ pub fn main() {
             }
             check = area.mapv(|a| (a>=10) as i32)*(1-&flashed);
         }
-        println!("{}",step+1);
         counter += flashed.sum();
         area = area*(1-flashed);
-        println!("{:?}", area);
     }
-    println!("{:?}", area);
     println!("{:?}", counter);
 }
