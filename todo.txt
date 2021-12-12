@@ -1,3 +1,3 @@
 4: remove duplicated structure
 8b: remove bruteforce
-9b: do in rust
+9: Remove arrays? b: use sets instead of vec for basin
