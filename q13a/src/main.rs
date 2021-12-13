@@ -22,7 +22,6 @@ pub fn main() {
     for mut p in points{
         if p[axis] > k{
             p[axis] = 2*k - p[axis];
-            println!("{:?}", p);
         }
         new_points.insert(p);
     }
