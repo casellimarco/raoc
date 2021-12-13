@@ -1,2 +1,2 @@
 bench:
-	cd runner; cargo run --bin bench
+	cd runner; cargo run --release --bin bench
