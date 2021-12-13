@@ -29,9 +29,9 @@ pub fn main() {
         }
         points = new_points;
     }
-    for i in 0..max[1] + 1{
+    for i in 0..max[1]{
         let mut row = "".to_string();
-        for j in 0..max[0] + 1{
+        for j in 0..max[0]{
             if points.contains(&vec![j, i]){
                 row.push_str(&"#");
             }else{
