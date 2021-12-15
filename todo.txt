@@ -2,3 +2,5 @@
 8b: remove bruteforce
 9: Remove arrays? b: use sets instead of vec for basin
 12: Implement it in rust
+13: Don't use sets, store final result in vec<vec<&char>>
+14: Implement it in rust
