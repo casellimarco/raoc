@@ -24,7 +24,6 @@ rolls = {3:1,
 scores = [0, 0]
 
 player = 0
-from copy import copy
 import numpy as np
 from functools import lru_cache
 
@@ -32,8 +31,8 @@ from functools import lru_cache
 def one_turn(positions, scores, player):
     wins = np.array([0,0])
     for roll, n_r in rolls.items():
-        copy_positions = list(copy(positions))
-        copy_scores = list(copy(scores))
+        copy_positions = list(positions)
+        copy_scores = list(scores)
         copy_positions[player] = mod(positions[player] + roll, 10)
         copy_scores[player] += copy_positions[player]
         if copy_scores[player] > 20:
