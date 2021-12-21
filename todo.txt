@@ -8,3 +8,5 @@
 17: Implement it (part a: abs_min_y)(abs_min_y-1)/2)
 18: Implement it
 19: Implement it in rust
+20: Implement it in rust
+21: Implement it in rust
