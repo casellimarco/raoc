@@ -1,9 +1,6 @@
-first, second = open("input.txt").readlines()
+import numpy as np
+from functools import lru_cache
 
-first_position = int(first.strip().split(": ")[1])   
-second_position = int(second.strip().split(": ")[1])
-
-positions = [first_position, second_position]
 
 def mod(x, y):
     maybe_mod = x % y
@@ -21,12 +18,6 @@ rolls = {3:1,
          9:1}
 
 
-scores = [0, 0]
-
-player = 0
-import numpy as np
-from functools import lru_cache
-
 @lru_cache(maxsize=None)
 def one_turn(positions, scores, player):
     wins = np.array([0,0])
@@ -41,6 +32,14 @@ def one_turn(positions, scores, player):
             wins += n_r*one_turn(tuple(copy_positions), tuple(copy_scores), 1 - player)
     return wins
 
-wins = one_turn(tuple(positions), tuple(scores), player)
+first, second = open("input.txt").readlines()
+first_position = int(first.strip().split(": ")[1])   
+second_position = int(second.strip().split(": ")[1])
+
+positions = (first_position, second_position)
+scores = (0, 0)
+player = 0
+
+wins = one_turn(positions, scores, player)
 
 print(max(wins))
