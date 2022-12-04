@@ -11,6 +11,7 @@ cargo new ${PPATH}a
 cargo new ${PPATH}b
 
 code ${PPATH}a/src/main.rs ${PPATH}b/src/main.rs
+# gives time to vsc process to complete in order to have as end state the browser in foreground 
 sleep 1
 
 URL=https://adventofcode.com/${YEAR}/day/${DAY}
