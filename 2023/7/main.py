@@ -1,15 +1,23 @@
 from aocd import data
 from collections import Counter
 
-cards_value = {c: i for i, c in enumerate("23456789TJQKA")}
+cards = "23456789TJQKA" 
+cards_value = {c: i for i, c in enumerate(cards)}
+joker_cards = "J23456789TQKA" 
+joker_cards_value = {c: i for i, c in enumerate(joker_cards)}
 
 class Hand:
-    def __init__(self, input_string):
+    def __init__(self, input_string, with_jokers=False):
         self.cards, self.value = input_string.split()
         self.value = int(self.value)
-        self.counts = list(Counter(self.cards).values())
-        self.cards_value = sum(cards_value[c]*(4-i)**13 for i,c in enumerate(self.cards))
-
+        self.counter = Counter(self.cards)
+        if with_jokers and self.cards != "JJJJJ":
+            jokers = self.counter.pop("J", 0)
+            self.counter[self.counter.most_common()[0][0]] += jokers 
+        self.counts = list(self.counter.values())
+        self.counts.sort(reverse=True)
+        values = joker_cards_value if with_jokers else cards_value
+        self.cards_value = sum(values[c]*len(cards)**(4-i) for i,c in enumerate(self.cards))
 
     def __gt__(self, other):
         if self.counts == other.counts:
@@ -17,8 +25,6 @@ class Hand:
         else:
             return self.counts > other.counts
 
-data = data.splitlines()
-games = [Hand(d) for d in data]
-games.sort()
-
-print(sum(i*g.value for i, g in enumerate(games, start=1)))
+for i in [0, 1]:
+    games = sorted([Hand(d, i) for d in data.splitlines()])
+    print(i+1, sum(i*g.value for i, g in enumerate(games, start=1)))
