@@ -10,11 +10,11 @@ class Hand:
     def __init__(self, input_string, with_jokers=False):
         self.cards, self.value = input_string.split()
         self.value = int(self.value)
-        self.counter = Counter(self.cards)
+        counter = Counter(self.cards)
         if with_jokers and self.cards != "JJJJJ":
-            jokers = self.counter.pop("J", 0)
-            self.counter[self.counter.most_common()[0][0]] += jokers 
-        self.counts = list(self.counter.values())
+            jokers = counter.pop("J", 0)
+            counter[counter.most_common()[0][0]] += jokers 
+        self.counts = list(counter.values())
         self.counts.sort(reverse=True)
         values = joker_cards_value if with_jokers else cards_value
         self.cards_value = sum(values[c]*len(cards)**(4-i) for i,c in enumerate(self.cards))
