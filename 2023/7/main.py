@@ -25,6 +25,6 @@ class Hand:
         else:
             return self.counts > other.counts
 
-for i in [0, 1]:
-    games = sorted([Hand(d, i) for d in data.splitlines()])
-    print(i+1, sum(i*g.value for i, g in enumerate(games, start=1)))
+for J in [0, 1]:
+    games = sorted([Hand(d, J) for d in data.splitlines()])
+    print(J+1, sum(i*g.value for i, g in enumerate(games, start=1)))
