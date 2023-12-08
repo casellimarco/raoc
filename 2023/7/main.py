@@ -22,8 +22,7 @@ class Hand:
     def __gt__(self, other):
         if self.counts == other.counts:
             return self.cards_value > other.cards_value
-        else:
-            return self.counts > other.counts
+        return self.counts > other.counts
 
 for J in [0, 1]:
     games = sorted([Hand(d, J) for d in data.splitlines()])
