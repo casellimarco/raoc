@@ -16,7 +16,7 @@ class Hand:
             counter[counter.most_common()[0][0]] += jokers 
         self.counts = sorted(counter.values(), reverse=True)
         values = joker_cards_value if with_jokers else cards_value
-        self.cards_value = (values[c] for c self.cards)
+        self.cards_value = (values[c] for c in self.cards)
 
     def __gt__(self, other):
         if self.counts == other.counts:
