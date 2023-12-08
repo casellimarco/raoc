@@ -3,8 +3,8 @@ from collections import Counter
 
 cards = "23456789TJQKA" 
 cards_value = {c: i for i, c in enumerate(cards)}
-joker_cards = "J23456789TQKA" 
-joker_cards_value = {c: i for i, c in enumerate(joker_cards)}
+joker_cards_value = cards_value.copy()
+joker_cards_value["J"] = -1
 
 class Hand:
     def __init__(self, input_string, with_jokers=False):
@@ -16,7 +16,7 @@ class Hand:
             counter[counter.most_common()[0][0]] += jokers 
         self.counts = sorted(counter.values(), reverse=True)
         values = joker_cards_value if with_jokers else cards_value
-        self.cards_value = sum(values[c]*len(cards)**(4-i) for i,c in enumerate(self.cards))
+        self.cards_value = (values[c] for c self.cards)
 
     def __gt__(self, other):
         if self.counts == other.counts:
