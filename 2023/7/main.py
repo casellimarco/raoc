@@ -14,8 +14,7 @@ class Hand:
         if with_jokers and self.cards != "JJJJJ":
             jokers = counter.pop("J", 0)
             counter[counter.most_common()[0][0]] += jokers 
-        self.counts = list(counter.values())
-        self.counts.sort(reverse=True)
+        self.counts = sorted(counter.values(), reverse=True)
         values = joker_cards_value if with_jokers else cards_value
         self.cards_value = sum(values[c]*len(cards)**(4-i) for i,c in enumerate(self.cards))
 
