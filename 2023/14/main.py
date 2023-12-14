@@ -42,12 +42,10 @@ print(1, score(m_1))
 
 from tqdm import tqdm
 scores = []
-# for c in tqdm(range(1000000000)):
+# for c in tqdm(range(1000000000)): No need to got that far
 for c in tqdm(range(10000)):
     for t in range(4):
         m = move_north(to_tuple(m))
-        # print(t)
-        # print(np.rot90(m, t))
         m = np.rot90(m, -1) 
     scores.append(score(m))
 
