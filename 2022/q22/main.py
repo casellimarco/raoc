@@ -17,7 +17,7 @@ class Cube:
         if z == 0:
             if y == -1:
                 new_z = 4
-            if y == size:
+            elif y == size:
                 new_z = 2
             else:
                 new_z = 1
@@ -29,7 +29,7 @@ class Cube:
         if z == 2:
             if y == -1:
                 new_z = 0
-            if y == size:
+            elif y == size:
                 new_z = 4
             else:
                 new_z = 2
@@ -41,7 +41,7 @@ class Cube:
         if z == 4:
             if y == -1:
                 new_z = 2
-            if y == size:
+            elif y == size:
                 new_z = 0
             else:
                 new_z = 3
