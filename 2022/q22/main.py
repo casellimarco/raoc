@@ -11,8 +11,9 @@ class Cube:
     direction: int = 0
     instructions: str = None
     current_location: Tuple[int, int, int] = (0, 0, 0)
+    three_d = False
 
-    def map(self, point):
+    def map_2d(self, point):
         z, y, x = point
         if z == 0:
             if y == -1:
@@ -52,7 +53,109 @@ class Cube:
                 new_z = 3
             
         return new_z, y%size, x%size
-
+    
+    def map_3d(self, point):
+        z, y, x = point
+        new_direction = self.direction
+        new_y = y%size
+        new_x = x%size
+        if z == 0:
+            if y == -1:
+                new_z = 5
+                new_direction = 0
+                new_y = new_x
+                new_x = 0
+            elif y == size:
+                new_z = 2
+            elif x == -1:
+                new_z = 3
+                new_direction = 0
+                new_x = 0
+                new_y = size - new_y - 1
+            elif x == size:
+                new_z = 1
+        if z == 1:
+            if y == -1:
+                new_z = 5
+            elif y == size:
+                new_z = 2
+                new_direction = 2
+                new_y = new_x
+                new_x = size - 1
+            elif x == -1:
+                new_z = 0
+            elif x == size:
+                new_z = 4
+                new_direction = 2
+                new_x = size - 1 
+                new_y = size - new_y - 1
+        if z == 2:
+            if y == -1:
+                new_z = 0
+            elif y == size:
+                new_z = 4
+            elif x == -1:
+                new_z = 3
+                new_direction = 1
+                new_x = new_y
+                new_y = 0
+            elif x == size:
+                new_z = 1
+                new_direction = 3
+                new_x = new_y
+                new_y = size - 1
+        if z == 3:
+            if y == -1:
+                new_z = 2
+                new_direction = 0
+                new_y = new_x
+                new_x = 0
+            elif y == size:
+                new_z = 5
+            elif x == -1:
+                new_z = 0
+                new_direction = 0
+                new_x = 0
+                new_y = size - new_y - 1
+            elif x == size:
+                new_z = 4
+        if z == 4:
+            if y == -1:
+                new_z = 2
+            elif y == size:
+                new_z = 5
+                new_direction = 2
+                new_y = new_x
+                new_x = size - 1
+            elif x == -1:
+                new_z = 3
+            elif x == size:
+                new_z = 1
+                new_direction = 2
+                new_x = size - 1
+                new_y = size - new_y - 1
+        if z == 5:
+            if y == -1:
+                new_z = 3
+            elif y == size:
+                new_z = 1
+            elif x == -1:
+                new_z = 0
+                new_direction = 1
+                new_x = new_y
+                new_y = 0
+            elif x == size:
+                new_z = 4
+                new_direction = 3
+                new_x = new_y
+                new_y = size - 1
+            
+        return new_z, new_y, new_x, new_direction
+    
+    def map(self, point):
+        if self.three_d:
+            return self.map_3d(point)
+        return self.map_2d(point)
 
     def move(self):
         z, y, x = self.current_location
@@ -67,8 +170,10 @@ class Cube:
         possible_next = (z,) + possible_next
         if set(p for p in possible_next).intersection({-1, size}):
             possible_next = self.map(possible_next)
-        if self.faces[possible_next] == 0:
-            self.current_location = possible_next
+        if self.faces[possible_next[:3]] == 0:
+            self.current_location = possible_next[:3]
+            if len(possible_next) == 4:
+                self.direction = possible_next[3]
 
     def run(self):
         # split instructions at every letter
@@ -102,10 +207,17 @@ with open("input.txt", "r") as f:
         elif i == size*4+1:
             cube.instructions = line.strip()
 
-        
+from copy import deepcopy
+
+cube3d = deepcopy(cube) 
 cube.run()
-print(cube.current_location)
 face_map = {0: (0, size), 1: (0, size*2), 2: (size, size), 3: (size*2, 0), 4: (size*2, size*2), 5: (size*3, 0)}
 face_location = face_map[cube.current_location[0]]
 score = (cube.current_location[1]+1+face_location[0])*1000 + (cube.current_location[2]+face_location[1]+1)*4 + cube.direction 
-print(score)
+print(1, score)
+
+cube3d.three_d = True
+cube3d.run()
+face_location = face_map[cube3d.current_location[0]]
+score = (cube3d.current_location[1]+1+face_location[0])*1000 + (cube3d.current_location[2]+face_location[1]+1)*4 + cube3d.direction 
+print(2, score)
