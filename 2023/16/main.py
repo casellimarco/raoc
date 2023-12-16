@@ -11,7 +11,6 @@ data=r""".|...\....
 from aocd import data
 import sys
 sys.setrecursionlimit(100000)
-energized = {((0,0),0)}
 
 def move(position, direction):
     y, x = position
@@ -31,14 +30,7 @@ m = np.array([[c for c in d] for d in data.splitlines()])
 def check(position):
     return 0 <= position[0] < m.shape[0] and 0 <= position[1] < m.shape[1]
 
-def one_step(position, direction):
-    # print(position, direction, m[position])
-    position = move(position, direction)
-    if not check(position):
-        return
-    if (position, direction) in energized:
-        return
-    energized.add((position, direction))
+def new_direction(position, direction):
     match m[position]:
         case ".":
             pass # do nothing
@@ -67,20 +59,46 @@ def one_step(position, direction):
                 case 1 | 3:
                     pass # do nothing
                 case _:
-                    for d in [1, 3]: 
-                        one_step(position, d)
-                    return
+                    return [1, 3]
         case "-":
             match direction:
                 case 0 | 2:
                     pass # do nothing
-                case _:
-                    for d in [0, 2]: 
-                        one_step(position, d)
-                    return
+                case 1 | 3:
+                    return [0, 2]
+    return [direction]
 
-    one_step(position, direction)
+def one_step(position, direction, energized):
+    # print(position, direction, m[position])
+    position = move(position, direction)
+    if not check(position):
+        return
+    if (position, direction) in energized:
+        return
+    energized.add((position, direction))
+    for d in new_direction(position, direction):
+        one_step(position, d, energized)
 
-# first character is \, so it changes the direction
-one_step((0,0), 1)
-print(1, len(set(p[0] for p in energized)))
+def solve(position, direction):
+    energized = {(position,direction)}
+    for d in new_direction(position, direction):
+        one_step(position, d, energized)
+    return len(set(p[0] for p in energized))
+
+
+position = (0,0)
+direction = 0
+print(1, solve(position, direction))
+
+
+# part 2
+
+energies = []
+for i in range(m.shape[0]):
+    energies.append(solve((i,0), 0))
+    energies.append(solve((i,m.shape[1]-1), 2))
+for i in range(m.shape[1]):
+    energies.append(solve((0,i), 1))
+    energies.append(solve((m.shape[0]-1,i), 3))
+
+print(2, max(energies))
