@@ -1,27 +1,25 @@
+from functools import lru_cache
 from aocd import data
 
 stones = list(map(int, data.split()))
 
-def process(stones):
-    new_stones = []
-    for stone in stones:
-        if stone == 0:
-            new_stones.append(1)
-        elif len(str(stone)) % 2 == 0:
-            stone = str(stone)
-            half = len(stone) // 2
-            new_stones.append(int(stone[:half]))
-            new_stones.append(int(stone[half:]))
-        else:
-            new_stones.append(stone * 2024)
-    return new_stones
+@lru_cache(maxsize=None)
+def convert(stone):
+    if stone == 0:
+        return [1]
+    elif (digits:=len(str_stone:=str(stone))) % 2 == 0:
+        half = digits // 2
+        return [int(str_stone[:half]), int(str_stone[half:])]
+    else:
+        return [stone * 2024]
 
-from tqdm import tqdm
+@lru_cache(maxsize=None)
+def process(stone, step):
+    new_stones = convert(stone)
+    if step == 1:
+        return len(new_stones)
+    return sum(process(stone, step-1) for stone in new_stones)
 
-for _ in tqdm(range(25)):
-    stones = process(stones)
-
-print(1, len(stones))
-
-
+print(1, sum(process(stone, 25) for stone in stones))
+print(2, sum(process(stone, 75) for stone in stones))
 
