@@ -3,12 +3,6 @@ from aocd import data
 from tqdm import tqdm
 import numpy as np
 
-# data=\
-# """1
-# 2
-# 3
-# 2024"""
-
 two_24 = 16777216
 mod = two_24 - 1
 
@@ -39,7 +33,9 @@ diffs = np.diff(values, axis=1)
 def extract_sequences(diffs, values):
     seq_to_value = Counter()
     for i in range(4, diffs.shape[0]+1):
-        seq_to_value[tuple(diffs[i-4:i].tolist())] = values[i]
+        key = tuple(diffs[i-4:i].tolist())
+        if key not in seq_to_value:
+            seq_to_value[key] = values[i]
     return seq_to_value
 
 seqs = []   
